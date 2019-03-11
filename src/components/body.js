@@ -11,18 +11,19 @@ const isActive = ({ isCurrent }) => {
 }
 
 const flatMap = (arr, callback) => {
+  const result = []
   const _flatMap = node => {
     if (isArr(node)) {
-      return node.map(_flatMap)
+      node.forEach(_flatMap)
     } else if (node) {
-      const newNode = { ...node }
-      if (isArr(newNode.children) && newNode.children.length) {
-        newNode.children = _flatMap(newNode.children)
+      if (isArr(node.children) && node.children.length) {
+        _flatMap(node.children)
       }
-      return callback(newNode)
+      result.push(callback(node))
     }
   }
-  return _flatMap(arr)
+  _flatMap(arr)
+  return result
 }
 
 const CanNotFindDocContent = () => <div>Can not find document contents.</div>
@@ -40,12 +41,16 @@ const getDefaultComponent = doc => {
 
 const SideMenu = ({ dataSource }) => {
   dataSource = toArr(dataSource)
-  const content = dataSource.map(({ title, slug, children }) => {
+  const content = dataSource.map(({ title, slug, component, children }) => {
     return (
       <li key={slug}>
-        <Link getProps={isActive} to={slug}>
-          {title}
-        </Link>
+        {component ? (
+          <Link className="menu-node" getProps={isActive} to={slug}>
+            {title}
+          </Link>
+        ) : (
+          <span className="menu-node">{title}</span>
+        )}
         <SideMenu dataSource={children} />
       </li>
     )

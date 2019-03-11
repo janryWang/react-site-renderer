@@ -84,6 +84,7 @@
     "chroma-js": "^2.0.3",
     "hashids": "^1.2.2",
     "lodash.get": "^4.4.2",
+    "cubic-bezier": "^0.1.2",
     "palx": "^1.0.3",
     "prop-types": "^15.6.2",
     "react-burger-menu": "^2.6.5",

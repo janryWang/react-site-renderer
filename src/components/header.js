@@ -8,18 +8,49 @@ import Navigator from './navigator'
 export default styled(({ dataSource, className }) => {
   const { logo, search } = useContext(SiteContext)
   return (
-    <div className={className}>
+    <div className={`site-header ${className}`}>
       <div className="header-content">
-        <div className="header-left">
-          <Link to={`/`}>
-            <div className="logo">
-              {React.isValidElement(logo) ? logo : <img src={logo} />}
-            </div>
-          </Link>
-          <Search {...search} />
-          <Navigator dataSource={dataSource} />
-        </div>
+        <Link to={`/`}>
+          <div className="logo">
+            {React.isValidElement(logo) ? logo : logo ? <img src={logo} /> : 'This is Logo'}
+          </div>
+        </Link>
+        <Search {...search} />
+        <Navigator dataSource={dataSource} />
       </div>
     </div>
   )
-})``
+})`
+border-bottom: 1px solid rgb(238, 238, 238);
+background:#fff;
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 30px;
+  @media (max-width: 860px) {
+    margin: 0 30px;
+  }
+  .logo {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position:relative;
+    justify-content: left;
+    width: 270px;
+    img {
+      height: 60px;
+      display: inline-block;
+    }
+    &:after{
+      content:"";
+      display:block;
+      height:22px;
+      border-left:1px solid #eee;
+      position:absolute;
+      top:50%;
+      right:0;
+      transform:translateY(-50%);
+    }
+  }
+`

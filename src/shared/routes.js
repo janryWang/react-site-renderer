@@ -1,16 +1,23 @@
 import React, { useContext } from 'react'
 import { Router } from '@reach/router'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import Header from '../components/header'
 import Body from '../components/body'
 import Home from '../components/home'
 //import Footer from '../components/footer'
 import SiteContext from './context'
 
+const GlobalStyle = createGlobalStyle`
+body{
+  margin:0;
+}
+`
+
 export default styled(({ className }) => {
   const { homes, headers } = useContext(SiteContext)
   return (
     <div className={className}>
+      <GlobalStyle/>
       <Header dataSource={headers} />
       <Router>
         <Home dataSource={homes} path="/" />
