@@ -4,6 +4,7 @@
   "description": "React Site Renderer",
   "main": "lib/index.js",
   "scripts": {
+    "start": "doc-scripts start",
     "build": "babel src --out-dir lib",
     "precommit": "npm run build && lint-staged && npm run test  && git add -A"
   },
@@ -82,9 +83,11 @@
     "@reach/router": "^1.2.1",
     "capitalize": "^2.0.0",
     "chroma-js": "^2.0.3",
+    "classnames": "^2.2.6",
+    "cubic-bezier": "^0.1.2",
+    "hash-source": "^1.0.1",
     "hashids": "^1.2.2",
     "lodash.get": "^4.4.2",
-    "cubic-bezier": "^0.1.2",
     "palx": "^1.0.3",
     "prop-types": "^15.6.2",
     "react-burger-menu": "^2.6.5",

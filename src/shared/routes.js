@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
-import { Router } from '@reach/router'
+import { Router, Match } from '@reach/router'
 import styled, { createGlobalStyle } from 'styled-components'
 import Header from '../components/header'
 import Body from '../components/body'
 import Home from '../components/home'
+import cls from 'classnames'
 //import Footer from '../components/footer'
 import SiteContext from './context'
 
@@ -16,16 +17,22 @@ body{
 export default styled(({ className }) => {
   const { homes, headers } = useContext(SiteContext)
   return (
-    <div className={className}>
-      <GlobalStyle/>
-      <Header dataSource={headers} />
-      <Router>
-        <Home dataSource={homes} path="/" />
-        {headers.map(doc => {
-          return <Body doc={doc} path={`${doc.slug}/*`} key={doc.slug} />
-        })}
-      </Router>
-    </div>
+    <Match path="/">
+      {props => {
+        return (
+          <div className={cls(className, { home: !!props.match })}>
+            <GlobalStyle />
+            <Header dataSource={headers} />
+            <Router>
+              <Home dataSource={homes} path="/" />
+              {headers.map(doc => {
+                return <Body doc={doc} path={`${doc.slug}/*`} key={doc.slug} />
+              })}
+            </Router>
+          </div>
+        )
+      }}
+    </Match>
   )
 })`
   font-family: Lato, 'Chinese Quote', -apple-system, BlinkMacSystemFont,

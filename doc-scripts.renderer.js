@@ -14,7 +14,55 @@ const docs = [
           { title: '案例2-1', component: () => <div>案例2-1</div> },
           { title: '案例2-2', component: () => <div>案例2-2</div> }
         ]
-      }
+      },
+      { title: '案例1', component: () => <div>这是案例1</div> },
+      {
+        title: '案例2',
+        children: [
+          { title: '案例2-1', component: () => <div>案例2-1</div> },
+          { title: '案例2-2', component: () => <div>案例2-2</div> }
+        ]
+      },
+      { title: '案例1', component: () => <div>这是案例1</div> },
+      {
+        title: '案例2',
+        children: [
+          { title: '案例2-1', component: () => <div>案例2-1</div> },
+          { title: '案例2-2', component: () => <div>案例2-2</div> }
+        ]
+      },
+      { title: '案例1', component: () => <div>这是案例1</div> },
+      {
+        title: '案例2',
+        children: [
+          { title: '案例2-1', component: () => <div>案例2-1</div> },
+          { title: '案例2-2', component: () => <div>案例2-2</div> }
+        ]
+      },
+      { title: '案例1', component: () => <div>这是案例1</div> },
+      {
+        title: '案例2',
+        children: [
+          { title: '案例2-1', component: () => <div>案例2-1</div> },
+          { title: '案例2-2', component: () => <div>案例2-2</div> }
+        ]
+      },
+      { title: '案例1', component: () => <div>这是案例1</div> },
+      {
+        title: '案例2',
+        children: [
+          { title: '案例2-1', component: () => <div>案例2-1</div> },
+          { title: '案例2-2', component: () => <div>案例2-2</div> }
+        ]
+      },
+      { title: '案例1', component: () => <div>这是案例1</div> },
+      {
+        title: '案例2',
+        children: [
+          { title: '案例2-1', component: () => <div>案例2-1</div> },
+          { title: '案例2-2', component: () => <div>案例2-2</div> }
+        ]
+      },
     ]
   },
   {
@@ -32,7 +80,7 @@ export default () => {
     <Renderer
       docs={docs}
       logo="//img.alicdn.com/tfs/TB1eH62LmzqK1RjSZPcXXbTepXa-206-98.png"
-      color="#0153F4"
+      color="blue"
     />
   )
 }

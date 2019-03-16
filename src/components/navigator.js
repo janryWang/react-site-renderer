@@ -2,8 +2,9 @@ import React, { useContext } from 'react'
 import { Link } from '@reach/router'
 import styled, { withTheme } from 'styled-components'
 
-const isActive = ({ isCurrent }) => {
-  return isCurrent ? { className: 'active' } : null
+const isActive = home => ({ isPartiallyCurrent, isCurrent }) => {
+  if (home) return isCurrent ? { className: 'active' } : null
+  return isPartiallyCurrent ? { className: 'active' } : null
 }
 
 export default withTheme(styled(({ dataSource, className, theme }) => (
@@ -11,7 +12,7 @@ export default withTheme(styled(({ dataSource, className, theme }) => (
     {dataSource.map(({ title, slug, home }) => {
       return (
         <li className="nav-item" key={slug}>
-          <Link getProps={isActive} to={home ? '/' : `/${slug}`}>
+          <Link getProps={isActive(home)} to={home ? '/' : `/${slug}`}>
             {title}
           </Link>
         </li>
