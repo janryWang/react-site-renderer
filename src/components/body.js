@@ -1,8 +1,11 @@
-import React, { useContext } from 'react'
-import { Link, Router, Redirect } from '@reach/router'
+import React, { useContext, useState } from 'react'
+import { Link, Router, Redirect, Match } from '@reach/router'
 import SiteContext from '../shared/context'
 import styled, { withTheme } from 'styled-components'
 import { isArr } from '../shared/types'
+import { FiMenu, FiX, FiExternalLink } from 'react-icons/fi'
+import EmptyPage from './empty'
+import cls from 'classnames'
 import Sticky from 'react-stikky'
 
 const bodyRef = React.createRef()
@@ -29,10 +32,8 @@ const flatMap = (arr, callback) => {
   return result
 }
 
-const CanNotFindDocContent = () => <div>Can not find document contents.</div>
-
 const getDefaultComponent = doc => {
-  return (doc && doc.component) || CanNotFindDocContent
+  return (doc && doc.component) || EmptyPage
 }
 
 const getStartDocPath = doc => {
@@ -59,32 +60,52 @@ const getStickyState = () => {
   if (offset > 0) {
     return {
       menuOffset: offset,
-      notSticky: window.innerWidth <= 710
+      notSticky: window.innerWidth <= 690
     }
   } else {
     return {
       menuOffset: 0,
-      notSticky: window.innerWidth <= 710
+      notSticky: window.innerWidth <= 690
     }
   }
 }
 
 const SideMenu = ({ dataSource, paddingLeft, autoIndex }) => {
   dataSource = toArr(dataSource)
-  const content = dataSource.map(({ title, slug, component, children }) => {
-    return (
-      <li key={slug} style={{ paddingLeft }}>
-        {component ? (
-          <Link className="menu-node" getProps={isActive} to={slug}>
-            <span>{title}</span>
-          </Link>
-        ) : (
-          <span className="menu-node no-page">{title}</span>
-        )}
-        <SideMenu dataSource={children} paddingLeft={paddingLeft + 10} />
-      </li>
-    )
-  })
+  const content = dataSource.map(
+    ({ title, slug, component, link, children }) => {
+      return (
+        <li key={slug} style={{ paddingLeft }}>
+          {component ? (
+            <React.Fragment>
+              {link && (
+                <a className="menu-node" href={link} target="_blank">
+                  {title}
+                  <FiExternalLink style={{ marginLeft: 4, fontSize: 10 }} />
+                </a>
+              )}
+              {!link && (
+                <Link className="menu-node" getProps={isActive} to={slug}>
+                  <span>{title}</span>
+                </Link>
+              )}
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              {link && (
+                <a className="menu-node" href={link} target="_blank">
+                  {title}
+                  <FiExternalLink style={{ marginLeft: 4, fontSize: 10 }} />
+                </a>
+              )}
+              {!link && <span className="menu-node no-page">{title}</span>}
+            </React.Fragment>
+          )}
+          <SideMenu dataSource={children} paddingLeft={paddingLeft + 10} />
+        </li>
+      )
+    }
+  )
   if (dataSource.length) {
     return <ul>{content}</ul>
   } else {
@@ -93,23 +114,29 @@ const SideMenu = ({ dataSource, paddingLeft, autoIndex }) => {
 }
 
 export default withTheme(styled(({ doc, className, path, uri }) => {
+  const [menuVisible, seMenuVisible] = useState(false)
   return (
-    <div className={className} ref={bodyRef}>
-      <Sticky edge="top" createState={getStickyState}>
-        {({ isSticky, menuOffset, unsticky }) => (
-          <div
-            className="site-nav"
-            style={{
-              height: isSticky
-                ? window.innerHeight - 60
-                : window.innerHeight - 140,
-              overflow: 'auto'
-            }}
-          >
-            <SideMenu dataSource={doc.children} paddingLeft={30} />
-          </div>
-        )}
-      </Sticky>
+    <div
+      className={cls(className, { 'menu-visible': menuVisible })}
+      ref={bodyRef}
+    >
+      {doc.children && doc.children.length && (
+        <Sticky edge="top" createState={getStickyState}>
+          {({ isSticky, menuOffset, unsticky }) => (
+            <div
+              className="site-nav"
+              style={{
+                height: isSticky
+                  ? window.innerHeight - 70
+                  : window.innerHeight - 150,
+                overflow: 'auto'
+              }}
+            >
+              <SideMenu dataSource={doc.children} paddingLeft={30} />
+            </div>
+          )}
+        </Sticky>
+      )}
       <div className="site-body">
         <Router>
           {doc.component ? (
@@ -125,19 +152,72 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
           })}
         </Router>
       </div>
+      <div
+        className="body-menu-btn"
+        onClick={() => seMenuVisible(!menuVisible)}
+      >
+        {React.createElement(!menuVisible ? FiMenu : FiX, {
+          style: { fontSize: 26 },
+          strokeWidth: 1
+        })}
+      </div>
     </div>
   )
 })`
   display: flex;
-  .sticky-wrapper{
-    width:300px;
+  .sticky-wrapper {
+    width: 300px;
+    @media (max-width: 860px) {
+      width: 210px;
+    }
+    @media (max-width: 690px) {
+      display: none;
+    }
+  }
+  &.menu-visible .sticky-wrapper {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100% !important;
+    overflow: auto;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    .site-nav {
+      width: 100% !important;
+      height: auto !important;
+    }
+  }
+  .body-menu-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    display: none;
+    cursor: pointer;
+    justify-content: center;
+    z-index: 11;
+    align-items: center;
+    border-radius: 100px;
+    background: #fff;
+    box-shadow: 0 0 14px #8c8c8c61;
+    color: ${props => props.theme.main[3]};
+    @media (max-width: 690px) {
+      display: flex;
+    }
   }
   .site-nav {
-    min-width: 300px;
+    width: 300px;
     border-right: 1px solid #eee;
     padding-top: 30px;
-    padding-bottom:30px;
+    padding-bottom: 30px;
     min-height: 300px;
+    @media (max-width: 860px) {
+      width: 210px;
+    }
     ul {
       list-style: none;
       padding: 0;

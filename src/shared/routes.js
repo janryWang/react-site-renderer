@@ -5,6 +5,7 @@ import Header from '../components/header'
 import Body from '../components/body'
 import Home from '../components/home'
 import cls from 'classnames'
+import EmptyPage from '../components/empty'
 //import Footer from '../components/footer'
 import SiteContext from './context'
 
@@ -26,7 +27,18 @@ export default styled(({ className }) => {
             <Router>
               <Home dataSource={homes} path="/" />
               {headers.map(doc => {
-                return <Body doc={doc} path={`${doc.slug}/*`} key={doc.slug} />
+                if (doc.children && doc.children.length) {
+                  return (
+                    <Body doc={doc} path={`${doc.slug}/*`} key={doc.slug} />
+                  )
+                } else if (doc.component) {
+                  return React.createElement(doc.component, {
+                    path: `${doc.slug}`,
+                    key: doc.slug
+                  })
+                } else {
+                  return <EmptyPage path={`${doc.slug}`} key={doc.slug} />
+                }
               })}
             </Router>
           </div>

@@ -31,7 +31,10 @@ box-shadow: 0 0 10px #eeeeeec9;
   justify-content: space-between;
   margin: 0 30px;
   @media (max-width: 860px) {
-    margin: 0 30px;
+    margin: 0 20px;
+  }
+  @media (max-width: 690px) {
+    margin: 0 10px;
   }
   .logo {
     height: 60px;
@@ -40,6 +43,9 @@ box-shadow: 0 0 10px #eeeeeec9;
     position:relative;
     justify-content: left;
     width: 270px;
+    @media (max-width: 860px) {
+      width:180px;
+    }
     img {
       height: 60px;
       display: inline-block;
@@ -53,6 +59,9 @@ box-shadow: 0 0 10px #eeeeeec9;
       top:50%;
       right:0;
       transform:translateY(-50%);
+      @media (max-width: 690px) {
+        display:none;
+      }
     }
   }
 `

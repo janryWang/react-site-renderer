@@ -3,13 +3,16 @@ import Renderer from './src'
 
 const docs = [
   { title: '首页', component: () => <div>这是首页</div>, home: true },
-  { title: '快速开始', component: () => <div>这是快速开始</div> },
+  {
+    title: '快速开始'
+  },
   {
     title: '案例场景',
     children: [
       { title: '案例1', component: () => <div>这是案例1</div> },
       {
         title: '案例2',
+        link: '//baidu.com',
         children: [
           { title: '案例2-1', component: () => <div>案例2-1</div> },
           { title: '案例2-2', component: () => <div>案例2-2</div> }
@@ -62,7 +65,7 @@ const docs = [
           { title: '案例2-1', component: () => <div>案例2-1</div> },
           { title: '案例2-2', component: () => <div>案例2-2</div> }
         ]
-      },
+      }
     ]
   },
   {
@@ -79,7 +82,7 @@ export default () => {
   return (
     <Renderer
       docs={docs}
-      logo="//img.alicdn.com/tfs/TB1eH62LmzqK1RjSZPcXXbTepXa-206-98.png"
+      logo="//img.alicdn.com/tfs/TB16Rt6XK3tHKVjSZSgXXX4QFXa-186-148.png"
       color="blue"
     />
   )
