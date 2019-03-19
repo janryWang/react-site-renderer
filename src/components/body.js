@@ -276,6 +276,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
         &.active {
           border-right: 3px solid ${props => props.theme.base};
           position: relative;
+          color: ${props => props.theme.base};
           &::after {
             content: '';
             display: block;
@@ -287,9 +288,6 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
             background: ${props => props.theme.main[1]};
             opacity: 0.4;
             z-index: 0;
-          }
-          a {
-            color: ${props => props.theme.base};
           }
         }
       }
