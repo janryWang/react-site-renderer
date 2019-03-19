@@ -46,6 +46,7 @@ export default styled(({ dataSource, className }) => {
       font-size: 20px;
       font-weight: 300;
       text-transform: uppercase;
+      text-decoration: none;
     }
     .logo {
       height: 60px;
