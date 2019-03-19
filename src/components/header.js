@@ -54,10 +54,11 @@ export default styled(({ dataSource, className }) => {
         font-weight: 300;
         text-transform: uppercase;
       }
+      @media (max-width: 860px) {
+        width: 180px;
+      }
     }
-    @media (max-width: 860px) {
-      width: 180px;
-    }
+    
     img {
       height: 60px;
       display: inline-block;

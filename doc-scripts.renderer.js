@@ -9,7 +9,7 @@ const docs = [
   {
     title: '案例场景',
     children: [
-      { title: '案例1', component: () => <div>这是案例1</div> },
+      { title: '案例1', component: () => <div>这是案例1,<a href={'./案例2.md'}>跳转案例2</a></div> },
       {
         title: '案例2',
         link: '//baidu.com',

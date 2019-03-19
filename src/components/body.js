@@ -114,6 +114,7 @@ const SideMenu = ({ dataSource, paddingLeft, autoIndex }) => {
 }
 
 export default withTheme(styled(({ doc, className, path, uri }) => {
+  const { docs } = useContext(SiteContext)
   const [menuVisible, seMenuVisible] = useState(false)
   return (
     <div
