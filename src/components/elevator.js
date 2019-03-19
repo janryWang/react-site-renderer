@@ -1,6 +1,6 @@
-import React, { Component } from "react"
-import styled from "styled-components"
-import Sticky from "react-stikky"
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import Sticky from 'react-stikky'
 
 const toArr = val => {
   return Array.isArray(val) ? val : val ? [val] : []
@@ -41,13 +41,13 @@ export default styled(
     renderMenuList(dataSource, root) {
       const { levels } = this.state
       return (
-        <ul className={`menu-list ${root ? "root" : ""}`}>
+        <ul className={`menu-list ${root ? 'root' : ''}`}>
           {toArr(dataSource).map(({ slug, text, children, level }, key) => {
             return (
               <li key={key}>
                 <a
                   href={`#${slug}`}
-                  className={`${this.state.pathname === slug ? "active" : ""}`}
+                  className={`${this.state.pathname === slug ? 'active' : ''}`}
                 >
                   <span>{text}</span>
                 </a>
@@ -67,8 +67,8 @@ export default styled(
           edge="top"
           stickiedStyle={{
             width: 200,
-            height: "calc(100% - 80px)",
-            overflowY: "auto"
+            height: 'calc(100% - 80px)',
+            overflowY: 'auto'
           }}
           triggerDistance={50}
           zIndex={10}
@@ -79,14 +79,14 @@ export default styled(
     }
 
     changeAnchorBehavior(element) {
-      element.querySelectorAll(".react-demo-a").forEach(el => {
-        if (!el.target) el.target = "_blank"
+      element.querySelectorAll('.react-demo-a').forEach(el => {
+        if (!el.target) el.target = '_blank'
       })
     }
 
     loadDataSource(element) {
       const list = Array.prototype.map.call(
-        element.querySelectorAll("h1,h2,h3,h4,h5"),
+        element.querySelectorAll('h1,h2,h3,h4,h5'),
         el => {
           const level = parseInt(el.tagName.charAt(1))
           const slug = el.id
@@ -194,19 +194,41 @@ export default styled(
       })
     }
 
+    initialDataSource = () => {
+      this.loadDataSource(this.ref.current)
+      this.changeAnchorBehavior(this.ref.current)
+    }
+
     componentDidMount() {
       if (this.ref && this.ref.current) {
-        this.loadDataSource(this.ref.current)
-        this.changeAnchorBehavior(this.ref.current)
+        const content = this.ref.current.querySelector('.content')
+        const childCount = content.childElementCount
+        if (childCount > 0) {
+          this.initialDataSource()
+        } else {
+          content.addEventListener(
+            'DOMSubtreeModified',
+            this.initialDataSource,
+            false
+          )
+        }
       }
-      window.addEventListener("scroll", this.scrollHandler)
-      window.addEventListener("hashchange", this.hashChangeHandler)
+      window.addEventListener('scroll', this.scrollHandler)
+      window.addEventListener('hashchange', this.hashChangeHandler)
       this.scrollHandler()
     }
 
     componentWillUnmount() {
-      window.removeEventListener("scroll", this.scrollHandler)
-      window.removeEventListener("hashchange", this.hashChangeHandler)
+      window.removeEventListener('scroll', this.scrollHandler)
+      window.removeEventListener('hashchange', this.hashChangeHandler)
+      if (this.ref && this.ref.current) {
+        const content = this.ref.current.querySelector('.content')
+        content.removeEventListener(
+          'DOMSubtreeModified',
+          this.initialDataSource,
+          false
+        )
+      }
     }
 
     render() {
@@ -244,7 +266,7 @@ export default styled(
         display: block;
         display: block;
         &.active:before {
-          content: "";
+          content: '';
           display: block;
           position: absolute;
           left: -2px;
@@ -256,7 +278,11 @@ export default styled(
   }
   .content {
     flex-shrink: 3;
+    margin-right:20px;
     width: calc(100% - 240px);
+  }
+  .sticky-wrapper {
+    width:180px !important;
   }
   @media (max-width: 860px) {
     .sticky-wrapper {

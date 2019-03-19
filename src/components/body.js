@@ -7,6 +7,7 @@ import { FiMenu, FiX, FiExternalLink } from 'react-icons/fi'
 import EmptyPage from './empty'
 import cls from 'classnames'
 import Sticky from 'react-stikky'
+import Elevator from './elevator'
 
 const bodyRef = React.createRef()
 
@@ -33,6 +34,13 @@ const flatMap = (arr, callback) => {
 }
 
 const getDefaultComponent = doc => {
+  return props => (
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <Elevator>
+        {React.createElement(doc && doc.component ? doc.component : EmptyPage)}
+      </Elevator>
+    </React.Suspense>
+  )
   return (doc && doc.component) || EmptyPage
 }
 
@@ -113,7 +121,6 @@ const SideMenu = ({ dataSource, paddingLeft, autoIndex }) => {
   }
 }
 
-
 export default withTheme(styled(({ doc, className, path, uri }) => {
   const { docs } = useContext(SiteContext)
   const [menuVisible, seMenuVisible] = useState(false)
@@ -169,7 +176,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
   display: flex;
   .sticky-wrapper {
     width: 300px;
-    transition: all .15s ease-in-out;
+    transition: all 0.15s ease-in-out;
     flex-shrink: 0;
     @media (max-width: 860px) {
       width: 210px;
