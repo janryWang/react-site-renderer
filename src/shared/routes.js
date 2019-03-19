@@ -25,12 +25,13 @@ export default styled(({ className }) => {
             <GlobalStyle />
             <Header dataSource={headers} />
             <Router>
+              {homes.length === 0 && headers[0] && (
+                <Redirect from="/" noThrow to={headers[0].slug} />
+              )}
               <Home dataSource={homes} path="/" />
-              {headers.map((doc,index) => {
+              {headers.map((doc, index) => {
                 if (doc.children && doc.children.length) {
-                  return (
-                    <Body doc={doc} path={`${doc.slug}/*`} key={index} />
-                  )
+                  return <Body doc={doc} path={`${doc.slug}/*`} key={index} />
                 } else if (doc.component) {
                   return React.createElement(doc.component, {
                     path: `${doc.slug}`,

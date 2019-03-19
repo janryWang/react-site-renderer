@@ -30,9 +30,6 @@ export const parseDocs = docs => {
       headers.push(doc)
     }
   })
-  if (homes.length == 0 && headers[0]) {
-    homes.push(headers[0])
-    headers[0].home = true
-  }
+ 
   return { homes, headers }
 }

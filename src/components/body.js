@@ -170,6 +170,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
   .sticky-wrapper {
     width: 300px;
     transition: all .15s ease-in-out;
+    flex-shrink: 0;
     @media (max-width: 860px) {
       width: 210px;
     }
