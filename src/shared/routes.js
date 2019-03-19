@@ -26,18 +26,18 @@ export default styled(({ className }) => {
             <Header dataSource={headers} />
             <Router>
               <Home dataSource={homes} path="/" />
-              {headers.map(doc => {
+              {headers.map((doc,index) => {
                 if (doc.children && doc.children.length) {
                   return (
-                    <Body doc={doc} path={`${doc.slug}/*`} key={doc.slug} />
+                    <Body doc={doc} path={`${doc.slug}/*`} key={index} />
                   )
                 } else if (doc.component) {
                   return React.createElement(doc.component, {
                     path: `${doc.slug}`,
-                    key: doc.slug
+                    key: index
                   })
                 } else {
-                  return <EmptyPage path={`${doc.slug}`} key={doc.slug} />
+                  return <EmptyPage path={`${doc.slug}`} key={index} />
                 }
               })}
             </Router>

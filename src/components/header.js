@@ -10,7 +10,7 @@ export default styled(({ dataSource, className }) => {
   return (
     <div className={`site-header ${className}`}>
       <div className="header-content">
-        <Link to={`/`}>
+        <Link to={`/`} className="logo-wrapper">
           <div className="logo">
             {React.isValidElement(logo) ? (
               logo
@@ -42,6 +42,11 @@ export default styled(({ dataSource, className }) => {
     @media (max-width: 690px) {
       margin: 0 10px;
     }
+    .logo-wrapper{
+      font-size: 20px;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
     .logo {
       height: 60px;
       display: flex;
@@ -49,11 +54,6 @@ export default styled(({ dataSource, className }) => {
       position: relative;
       justify-content: left;
       width: 270px;
-      a {
-        font-size: 20px;
-        font-weight: 300;
-        text-transform: uppercase;
-      }
       @media (max-width: 860px) {
         width: 180px;
       }

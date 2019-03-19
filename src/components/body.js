@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link, Router, Redirect, Match } from '@reach/router'
 import SiteContext from '../shared/context'
 import styled, { withTheme } from 'styled-components'
@@ -113,9 +113,13 @@ const SideMenu = ({ dataSource, paddingLeft, autoIndex }) => {
   }
 }
 
+
 export default withTheme(styled(({ doc, className, path, uri }) => {
   const { docs } = useContext(SiteContext)
   const [menuVisible, seMenuVisible] = useState(false)
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div
       className={cls(className, { 'menu-visible': menuVisible })}
