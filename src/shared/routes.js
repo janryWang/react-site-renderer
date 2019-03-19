@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Router, Match } from '@reach/router'
+import { Router, Match, Redirect } from '@reach/router'
 import styled, { createGlobalStyle } from 'styled-components'
 import Header from '../components/header'
 import Body from '../components/body'
