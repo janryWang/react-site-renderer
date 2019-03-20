@@ -29,7 +29,6 @@ export default styled(({ dataSource, className }) => {
 })`
   border-bottom: 1px solid rgb(238, 238, 238);
   background: #fff;
-  margin-bottom: 20px;
   box-shadow: 0 0 10px #eeeeeec9;
   .header-content {
     display: flex;

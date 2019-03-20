@@ -174,6 +174,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
   )
 })`
   display: flex;
+  margin-top:20px;
   .sticky-wrapper {
     width: 300px;
     transition: all 0.15s ease-in-out;
