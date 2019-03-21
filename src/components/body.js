@@ -295,11 +295,11 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     }
   }
   .site-body {
-    max-width: calc(100% - 300px);
+    max-width: calc(100% - 360px);
     padding: 30px;
     flex-grow: 3;
     @media (max-width: 860px) {
-       width: calc(100% - 210px);
+       width: calc(100% - 270px);
     }
     @media (max-width: 690px) {
       width:100%;
