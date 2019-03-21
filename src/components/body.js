@@ -130,7 +130,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
       ref={bodyRef}
     >
       {doc.children && doc.children.length && (
-        <Sticky edge="top" createState={getStickyState}>
+        <Sticky edge="top" className="left-menu-wrapper" createState={getStickyState}>
           {({ isSticky, menuOffset, unsticky }) => (
             <div
               className="site-nav"
@@ -175,7 +175,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
 })`
   display: flex;
   margin-top:20px;
-  .sticky-wrapper {
+  .left-menu-wrapper {
     width: 300px;
     transition: all 0.15s ease-in-out;
     flex-shrink: 0;
@@ -186,7 +186,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
       display: none;
     }
   }
-  &.menu-visible .sticky-wrapper {
+  &.menu-visible .left-menu-wrapper {
     display: block;
     position: fixed;
     width: 100%;
