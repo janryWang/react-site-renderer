@@ -295,7 +295,14 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     }
   }
   .site-body {
+    max-width: calc(100% - 300px);
     padding: 30px;
     flex-grow: 3;
+    @media (max-width: 860px) {
+      width: calc(100% - 210px);
+    }
+    @media (max-width: 690px) {
+      width:100%;
+    }
   }
 `)
