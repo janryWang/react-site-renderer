@@ -304,15 +304,5 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     @media (max-width: 690px) {
       width:100%;
     }
-    .just-code {
-
-      .demo-code-wrapper {
-        overflow: hidden;
-
-        pre {
-          float: left;
-        }
-      }
-    }
   }
 `)
