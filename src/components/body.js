@@ -109,7 +109,7 @@ const SideMenu = ({ dataSource, paddingLeft, autoIndex }) => {
               {!link && <span className="menu-node no-page">{title}</span>}
             </React.Fragment>
           )}
-          <SideMenu dataSource={children} paddingLeft={paddingLeft + 10} />
+          <SideMenu dataSource={children} paddingLeft={paddingLeft} />
         </li>
       )
     }
