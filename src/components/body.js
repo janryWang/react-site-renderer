@@ -299,10 +299,20 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     padding: 30px;
     flex-grow: 3;
     @media (max-width: 860px) {
-      width: calc(100% - 210px);
+       width: calc(100% - 210px);
     }
     @media (max-width: 690px) {
       width:100%;
+    }
+    .just-code {
+
+      .demo-code-wrapper {
+        overflow: hidden;
+
+        pre {
+          float: left;
+        }
+      }
     }
   }
 `)
