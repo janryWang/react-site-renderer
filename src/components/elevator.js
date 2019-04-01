@@ -65,6 +65,7 @@ export default styled(
       return (
         <Sticky
           edge="top"
+          className="right-menu-wrapper"
           stickiedStyle={{
             width: 200,
             height: 'calc(100% - 80px)',
@@ -281,11 +282,11 @@ export default styled(
     margin-right:20px;
     width: calc(100% - 240px);
   }
-  .sticky-wrapper {
+  .right-menu-wrapper {
     width:180px !important;
   }
   @media (max-width: 860px) {
-    .sticky-wrapper {
+    .right-menu-wrapper {
       display: none;
     }
     .content {
