@@ -1,6 +1,6 @@
 {
   "name": "react-site-renderer",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "description": "React Site Renderer",
   "main": "lib/index.js",
   "scripts": {

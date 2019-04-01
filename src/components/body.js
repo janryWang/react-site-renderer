@@ -130,7 +130,11 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
       ref={bodyRef}
     >
       {doc.children && doc.children.length && (
-        <Sticky edge="top" className="left-menu-wrapper" createState={getStickyState}>
+        <Sticky
+          edge="top"
+          className="left-menu-wrapper"
+          createState={getStickyState}
+        >
           {({ isSticky, menuOffset, unsticky }) => (
             <div
               className="site-nav"
@@ -174,7 +178,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
   )
 })`
   display: flex;
-  margin-top:20px;
+  margin-top: 20px;
   .left-menu-wrapper {
     width: 300px;
     transition: all 0.15s ease-in-out;
@@ -295,7 +299,14 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     }
   }
   .site-body {
+    max-width: calc(100% - 360px);
     padding: 30px;
     flex-grow: 3;
+    @media (max-width: 860px) {
+      max-width: calc(100% - 270px);
+    }
+    @media (max-width: 690px) {
+      max-width: calc(100% - 60px);
+    }
   }
 `)
