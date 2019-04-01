@@ -211,7 +211,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     display: none;
     cursor: pointer;
     justify-content: center;
-    z-index: 11;
+    z-index: 100001;
     align-items: center;
     border-radius: 100px;
     background: #fff;
