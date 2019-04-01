@@ -33,9 +33,10 @@ export default styled(({ dataSource, className }) => {
   height:60px;
   .header-content {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     margin: 0 30px;
+    height:60px;
     @media (max-width: 860px) {
       margin: 0 20px;
     }

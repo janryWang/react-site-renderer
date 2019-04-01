@@ -13,6 +13,10 @@ const GlobalStyle = createGlobalStyle`
 body{
   margin:0;
 }
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
 `
 
 export default styled(({ className }) => {

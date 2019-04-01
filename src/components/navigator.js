@@ -67,7 +67,6 @@ export default withTheme(styled(({ dataSource, className, theme }) => {
     flex-shrink: 3;
     min-width: 0;
     overflow: auto;
-
     li {
       display: inline-block;
       position: relative;
@@ -75,7 +74,7 @@ export default withTheme(styled(({ dataSource, className, theme }) => {
         color: #666;
         text-decoration: none;
         padding: 0 15px;
-        height: 57px;
+        height: 60px;
         line-height: 60px;
         display: block;
         border-bottom: 3px solid transparent;
