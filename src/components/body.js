@@ -299,14 +299,14 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     }
   }
   .site-body {
-    max-width: calc(100% - 360px);
+    max-width: calc(100% - 300px);
     padding: 30px;
     flex-grow: 3;
     @media (max-width: 860px) {
-      max-width: calc(100% - 270px);
+      max-width: calc(100% - 210px);
     }
     @media (max-width: 690px) {
-      max-width: calc(100% - 60px);
+      max-width: 100%;
     }
   }
 `)
