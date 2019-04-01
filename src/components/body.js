@@ -192,7 +192,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     width: 100%;
     height: 100% !important;
     overflow: auto;
-    z-index: 10;
+    z-index: 100000;
     top: 0;
     left: 0;
     bottom: 0;
