@@ -30,9 +30,10 @@ export default styled(({ dataSource, className }) => {
   border-bottom: 1px solid rgb(238, 238, 238);
   background: #fff;
   box-shadow: 0 0 10px #eeeeeec9;
+  height:60px;
   .header-content {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     margin: 0 30px;
     @media (max-width: 860px) {
