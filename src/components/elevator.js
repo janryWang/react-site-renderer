@@ -66,12 +66,14 @@ export default styled(
         <Sticky
           edge="top"
           className="right-menu-wrapper"
+          style={{
+            marginTop:50
+          }}
           stickiedStyle={{
             width: 200,
             height: 'calc(100% - 80px)',
             overflowY: 'auto'
           }}
-          triggerDistance={50}
           zIndex={10}
         >
           {this.renderMenuList(dataSource, true)}
