@@ -20,10 +20,10 @@ export default withTheme(styled(({ dataSource, className, theme }) => {
   return (
     <div className={className} ref={ref}>
       <ul className={cls(`site-navigator`, { visible })}>
-        {dataSource.map(({ title, slug, home, link }) => {
+        {dataSource.map(({ title, slug, home, link,type }) => {
           return (
             <li className="nav-item" key={slug}>
-              {link && (
+              {link && type !== 'html' && (
                 <a href={link} target="_blank">
                   {title}
                   <FiExternalLink style={{ marginLeft: 4, fontSize: 10 }} />
@@ -121,6 +121,7 @@ export default withTheme(styled(({ dataSource, className, theme }) => {
         box-shadow: 0 3px 10px #5f5f5f33;
         border-radius: 3px;
         align-items: flex-start;
+        z-index: 999;
         a {
           border-bottom: none !important;
           min-width: 200px;

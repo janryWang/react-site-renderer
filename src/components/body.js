@@ -34,14 +34,22 @@ const flatMap = (arr, callback) => {
 }
 
 const getDefaultComponent = doc => {
-  return props => (
-    <React.Suspense fallback={<div>Loading...</div>}>
-      <Elevator>
-        {React.createElement(doc && doc.component ? doc.component : EmptyPage)}
-      </Elevator>
-    </React.Suspense>
-  )
-  return (doc && doc.component) || EmptyPage
+  doc.__renderer =
+    doc.__renderer ||
+    (props => (
+      <React.Suspense fallback={<div>Loading...</div>}>
+        {doc.type === 'html' ? (
+          React.createElement(doc && doc.component ? doc.component : EmptyPage)
+        ) : (
+          <Elevator>
+            {React.createElement(
+              doc && doc.component ? doc.component : EmptyPage
+            )}
+          </Elevator>
+        )}
+      </React.Suspense>
+    ))
+  return doc.__renderer
 }
 
 const getStartDocPath = doc => {
@@ -78,7 +86,7 @@ const getStickyState = () => {
   }
 }
 
-const SideMenu = ({ dataSource, paddingLeft, autoIndex }) => {
+const SideMenu = ({ dataSource, paddingLeft, autoIndex, onClick }) => {
   dataSource = toArr(dataSource)
   const content = dataSource.map(
     ({ title, slug, component, link, children }) => {
@@ -86,17 +94,14 @@ const SideMenu = ({ dataSource, paddingLeft, autoIndex }) => {
         <li key={slug} style={{ paddingLeft }}>
           {component ? (
             <React.Fragment>
-              {link && (
-                <a className="menu-node" href={link} target="_blank">
-                  {title}
-                  <FiExternalLink style={{ marginLeft: 4, fontSize: 10 }} />
-                </a>
-              )}
-              {!link && (
-                <Link className="menu-node" getProps={isActive} to={slug}>
-                  <span>{title}</span>
-                </Link>
-              )}
+              <Link
+                className="menu-node"
+                onClick={onClick}
+                getProps={isActive}
+                to={slug}
+              >
+                <span>{title}</span>
+              </Link>
             </React.Fragment>
           ) : (
             <React.Fragment>
@@ -109,7 +114,11 @@ const SideMenu = ({ dataSource, paddingLeft, autoIndex }) => {
               {!link && <span className="menu-node no-page">{title}</span>}
             </React.Fragment>
           )}
-          <SideMenu dataSource={children} paddingLeft={paddingLeft} />
+          <SideMenu
+            dataSource={children}
+            onClick={onClick}
+            paddingLeft={paddingLeft}
+          />
         </li>
       )
     }
@@ -130,25 +139,20 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
       ref={bodyRef}
     >
       {doc.children && doc.children.length && (
-        <Sticky
-          edge="top"
-          className="left-menu-wrapper"
-          createState={getStickyState}
+        <div
+          className="site-nav"
+          style={{
+            overflow: 'auto'
+          }}
         >
-          {({ isSticky, menuOffset, unsticky }) => (
-            <div
-              className="site-nav"
-              style={{
-                height: isSticky
-                  ? window.innerHeight - 70
-                  : window.innerHeight - 150,
-                overflow: 'auto'
-              }}
-            >
-              <SideMenu dataSource={doc.children} paddingLeft={30} />
-            </div>
-          )}
-        </Sticky>
+          <SideMenu
+            dataSource={doc.children}
+            onClick={() => {
+              seMenuVisible(!menuVisible)
+            }}
+            paddingLeft={30}
+          />
+        </div>
       )}
       <div className="site-body">
         <Router>
@@ -167,7 +171,9 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
       </div>
       <div
         className="body-menu-btn"
-        onClick={() => seMenuVisible(!menuVisible)}
+        onClick={e => {
+          seMenuVisible(!menuVisible)
+        }}
       >
         {React.createElement(!menuVisible ? FiMenu : FiX, {
           style: { fontSize: 26 },
@@ -178,9 +184,14 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
   )
 })`
   display: flex;
-  margin-top: 20px;
-  .left-menu-wrapper {
+  position: fixed;
+  top: 80px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  .site-nav {
     width: 300px;
+    height: 100%;
     transition: all 0.15s ease-in-out;
     flex-shrink: 0;
     @media (max-width: 860px) {
@@ -190,20 +201,22 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
       display: none;
     }
   }
-  &.menu-visible .left-menu-wrapper {
-    display: block;
-    position: fixed;
-    width: 100%;
-    height: 100% !important;
-    overflow: auto;
-    z-index: 100000;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.98);
-    .site-nav {
-      width: 100% !important;
-      height: auto !important;
+  &.menu-visible .site-nav {
+    @media (max-width: 690px) {
+      display: block;
+      position: fixed;
+      width: 100%;
+      height: 100% !important;
+      overflow: auto;
+      z-index: 100000;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.98);
+      .site-nav {
+        width: 100% !important;
+        height: auto !important;
+      }
     }
   }
   .body-menu-btn {
@@ -230,9 +243,11 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     border-right: 1px solid #eee;
     padding-top: 30px;
     padding-bottom: 30px;
-    min-height: 300px;
     @media (max-width: 860px) {
       width: 210px;
+    }
+    @media (max-width: 690px) {
+      display: none;
     }
     ul {
       list-style: none;
@@ -302,11 +317,31 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     max-width: calc(100% - 300px);
     padding: 30px;
     flex-grow: 3;
+    overflow: auto;
     @media (max-width: 860px) {
       max-width: calc(100% - 210px);
     }
     @media (max-width: 690px) {
       max-width: 100%;
+    }
+  }
+  .doc-scripts-iframe {
+    border: none;
+    height: calc(100% - 80px);
+    position: fixed;
+    right: 0;
+    left: 300px;
+    bottom: 0;
+    top: 80px;
+    width: calc(100% - 300px);
+    overflow: auto;
+    @media (max-width: 860px) {
+      width: calc(100% - 210px);
+      left: 210px;
+    }
+    @media (max-width: 690px) {
+      width: 100%;
+      left: 0;
     }
   }
 `)
