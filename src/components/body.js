@@ -315,7 +315,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
   }
   .site-body {
     max-width: calc(100% - 300px);
-    padding: 30px;
+    padding: 0 30px;
     flex-grow: 3;
     overflow: auto;
     @media (max-width: 860px) {

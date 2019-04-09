@@ -67,7 +67,7 @@ export default styled(
           edge="top"
           className="right-menu-wrapper"
           style={{
-            marginTop:50
+            marginTop:100
           }}
           stickiedStyle={{
             width: 200,
@@ -256,6 +256,10 @@ export default styled(
     &.root {
       border-left: 1px solid #eee;
       position: relative;
+    }
+    .menu-list{
+      width:auto !important;
+      min-width:auto !important;
     }
     li {
       line-height: 25px;
