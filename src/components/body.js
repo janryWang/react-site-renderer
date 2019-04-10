@@ -7,7 +7,6 @@ import { FiMenu, FiX, FiExternalLink } from 'react-icons/fi'
 import EmptyPage from './empty'
 import cls from 'classnames'
 import Sticky from 'react-stikky'
-import Elevator from './elevator'
 
 const bodyRef = React.createRef()
 
@@ -38,15 +37,7 @@ const getDefaultComponent = doc => {
     doc.__renderer ||
     (props => (
       <React.Suspense fallback={<div>Loading...</div>}>
-        {doc.type === 'html' ? (
-          React.createElement(doc && doc.component ? doc.component : EmptyPage)
-        ) : (
-          <Elevator>
-            {React.createElement(
-              doc && doc.component ? doc.component : EmptyPage
-            )}
-          </Elevator>
-        )}
+        {React.createElement(doc && doc.component ? doc.component : EmptyPage)}
       </React.Suspense>
     ))
   return doc.__renderer
