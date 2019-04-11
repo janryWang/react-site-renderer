@@ -181,7 +181,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
   left: 0;
   width: 100%;
   .site-nav {
-    width: 300px;
+    width: 260px;
     height: 100%;
     transition: all 0.15s ease-in-out;
     flex-shrink: 0;
@@ -230,7 +230,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     }
   }
   .site-nav {
-    width: 300px;
+    width: 260px;
     border-right: 1px solid #eee;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -305,7 +305,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     }
   }
   .site-body {
-    max-width: calc(100% - 300px);
+    max-width: calc(100% - 260px);
     padding: 0 30px;
     flex-grow: 3;
     overflow: auto;
@@ -321,10 +321,10 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     height: calc(100% - 80px);
     position: fixed;
     right: 0;
-    left: 300px;
+    left: 260px;
     bottom: 0;
     top: 80px;
-    width: calc(100% - 300px);
+    width: calc(100% - 260px);
     overflow: auto;
     @media (max-width: 860px) {
       width: calc(100% - 210px);
