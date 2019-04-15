@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef } from 'react'
 import { Link, Match } from '@reach/router'
 import styled, { withTheme } from 'styled-components'
 import { FiMenu, FiX, FiExternalLink } from 'react-icons/fi'
-import { useOutsideClick } from 'react-use'
+import { useClickAway } from 'react-use'
 import cls from 'classnames'
 
 const isActive = home => ({ isPartiallyCurrent, isCurrent }) => {
@@ -13,7 +13,7 @@ const isActive = home => ({ isPartiallyCurrent, isCurrent }) => {
 export default withTheme(styled(({ dataSource, className, theme }) => {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
-  useOutsideClick(ref, () => {
+  useClickAway(ref, () => {
     if (visible === false) return
     setVisible(!visible)
   })
