@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef,useEffect } from 'react'
 import { Link, Match } from '@reach/router'
 import styled, { withTheme } from 'styled-components'
 import { FiMenu, FiX, FiExternalLink } from 'react-icons/fi'
-import { useClickAway } from 'react-use'
+import useClickAway from 'react-use/lib/useClickAway'
 import cls from 'classnames'
 
 const isActive = home => ({ isPartiallyCurrent, isCurrent }) => {
