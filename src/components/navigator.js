@@ -20,7 +20,7 @@ export default withTheme(styled(({ dataSource, className, theme }) => {
   return (
     <div className={className} ref={ref}>
       <ul className={cls(`site-navigator`, { visible })}>
-        {dataSource.map(({ title, slug, home, link,type }) => {
+        {dataSource.map(({ title, slug, home, link, type }) => {
           return (
             <li className="nav-item" key={slug}>
               {link && type !== 'html' && (
@@ -30,7 +30,13 @@ export default withTheme(styled(({ dataSource, className, theme }) => {
                 </a>
               )}
               {!link && (
-                <Link getProps={isActive(home)} to={home ? '/' : `/${slug}`}>
+                <Link
+                  getProps={isActive(home)}
+                  onClick={() => {
+                    setVisible(false)
+                  }}
+                  to={home ? '/' : `/${slug}`}
+                >
                   {title}
                 </Link>
               )}

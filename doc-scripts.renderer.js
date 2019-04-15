@@ -5,7 +5,7 @@ const docs = [
   { title: '首页', component: () => <div style={{height:1000}}>这是首页</div>, home: true },
   {
     title: '快速开始',
-    component: () => <div style={{height:1000}}>这是快速开始</div>
+    link:'//baidu.com'
   },
   {
     title: '案例场景',
