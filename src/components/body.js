@@ -146,7 +146,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
         </div>
       )}
       <div className="site-body">
-        <Router>
+        <Router className="iframe-container">
           {doc.component ? (
             React.createElement(doc.component, { path: '/' })
           ) : (
@@ -316,8 +316,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
       max-width: 100%;
     }
   }
-  .doc-scripts-iframe {
-    border: none;
+  .iframe-container{
     height: calc(100% - 80px);
     position: fixed;
     right: 0;
@@ -326,6 +325,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     top: 80px;
     width: calc(100% - 260px);
     overflow: auto;
+    overflow-scrolling: touch;
     @media (max-width: 860px) {
       width: calc(100% - 210px);
       left: 210px;
@@ -334,5 +334,10 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
       width: 100%;
       left: 0;
     }
+  }
+  .doc-scripts-iframe {
+    border: none;
+    width:100%;
+    height:100%;
   }
 `)
