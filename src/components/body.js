@@ -326,6 +326,7 @@ export default withTheme(styled(({ doc, className, path, uri }) => {
     width: calc(100% - 260px);
     overflow: auto;
     overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;
     @media (max-width: 860px) {
       width: calc(100% - 210px);
       left: 210px;
