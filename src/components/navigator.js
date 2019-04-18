@@ -17,18 +17,6 @@ export default withTheme(styled(({ dataSource, className, theme }) => {
     if (visible === false) return
     setVisible(!visible)
   })
-  useEffect(()=>{
-    const iframe = document.querySelector('iframe')
-    const handler = ()=>document.body.click()
-    if(iframe && iframe.contentDocument){
-      iframe.contentDocument.addEventListener('click',handler)
-    }
-    return ()=>{
-      if(iframe && iframe.contentDocument){
-        iframe.contentDocument.removeEventListener('click',handler)
-      }
-    }
-  },[])
   return (
     <div className={className} ref={ref}>
       <ul className={cls(`site-navigator`, { visible })}>
