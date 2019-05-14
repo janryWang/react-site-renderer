@@ -9,6 +9,16 @@ import createHashSource from "hash-source"
 let source = createHashSource()
 let history = createHistory(source)
 
+window.addEventListener(
+  "message",
+  e => {
+    if (e.data.type == "click") {
+      history.navigate(e.data.url)
+    }
+  },
+  false
+)
+
 const ReactSiteRenderer = connect()(({ docs, ...others }) => {
   const { homes, headers } = parseDocs(docs)
   return (
